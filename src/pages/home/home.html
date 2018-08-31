@@ -1,14 +1,30 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+		<ion-navbar>
+			<ion-title>
+				TODO LIST
+			</ion-title>
+		</ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+	<div [formGroup] = "addValid">
+		<ion-item>
+			<ion-input [(ngModel)] = "todo" placeholder = "Enter New Task Here" type  = "text" formControlName = "name" [required] = "true"></ion-input>
+		</ion-item>
+	</div>
+	<button ion-button full (click) = "showAlert()" (click) = "add()" >
+		<ion-icon name="add"></ion-icon>
+	</button>
+
+	<ion-list *ngFor = "let itemsList of todos">
+		<ion-item>
+			{{itemsList}}
+			<button ion-button color = "danger" (click) = "delete(itemsList)" (click) =  "showDelAlert()" item-right>
+			<ion-icon name = "trash"> </ion-icon>
+			</button>
+			<button ion-button color = "secondary" (click) = "edit(itemsList)" name = "edits"  item-right>
+			<ion-icon name = "create"> </ion-icon>
+			</button>
+		</ion-item>
+	</ion-list>
 </ion-content>
